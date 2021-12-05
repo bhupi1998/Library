@@ -1,0 +1,14 @@
+*{
+    box-sizing: border-box;
+}
+.bookData{
+    display: inline-flex;
+    width:100%;
+    padding: 10px;
+    justify-content: space-between;
+    border: black solid 2px;
+    background-color: hsl(0, 50%, 70%);
+}
+#tableHeader{
+    margin-bottom: 20px;
+}
