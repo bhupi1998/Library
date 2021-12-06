@@ -9,13 +9,28 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div id="container">
-    <div class="bookData" id="tableHeader" > <!--This div contains all the data for the bood-->
-        <p>Title</p>
-        <p>Author</p>
-        <p>Pages</p>
-        <p>Read</p>
+    <div class=header>
+        <h1>Your Library</h1>
+        <button id="addBook">Add Book</button>
     </div>
-</div>
+    <div id="container">
+        <div class="bookData" id="tableHeader" > <!--This div contains all the data for the bood-->
+            <p>Title</p>
+            <p>Author</p>
+            <p>Pages</p>
+            <p>Read</p>
+        </div>
+    </div>
+    <form id="newBookForm">
+        <label for="bookTitle">Book title:</label><br>
+        <input type="text" id="bookTitle" name="bookTitle"><br>
+        <label for="bookAuthor">Book author:</label><br>
+        <input type="text" id="bookAuthor" name="bookAuthor"><br>
+        <label for="bookPages">Book pages</label><br>
+        <input type="number" id="bookPages" name="bookPages" min="0"><br>
+        <label for="readBook">Read?</label>
+        <input type="checkbox" id="readBook" name="readBook"><br>
+        <input type="submit">
+    </form>
 </body>
 </html>

@@ -12,3 +12,16 @@
 #tableHeader{
     margin-bottom: 20px;
 }
+.header{
+    width:100%;
+    display:inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color:hsl(284, 17%, 69%);
+}
+.header>button{
+    height:50px;
+}
+#newBookForm{
+    border:black solid 2px;
+}

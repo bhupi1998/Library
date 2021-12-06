@@ -1,6 +1,7 @@
 let myLibrary = [];
 let globalBookIndex=0;
 const container=document.querySelector('#container');
+const addBook=document.querySelector('#addBook');
 
 function Book(title,author,pages,read){
     //constructor
@@ -26,5 +27,4 @@ function displayBooks(){
     </div>`;
     }
 }
-
 displayBooks();
