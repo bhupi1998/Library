@@ -17,6 +17,16 @@ function parseId(idVal){
     let idIndex= idVal.slice(1);
     return Number(idIndex);
 }
+
+function findIdIndex(elemId){
+    for(let i=0;i<myLibrary.length;i++){
+        if(myLibrary[i].index==parseId(elemId)){
+            console.log(i);
+            return i;
+        }
+    }
+    return -1;
+}
 function clearFields(){ //clears all values in new book form
     bookTitle.value='';
     bookAuthor.value='';
@@ -29,7 +39,7 @@ function Book(title,author,pages,read,bookIndex){
     this.author=author;
     this.pages=pages;
     this.read=read;
-    this.index=bookIndex;
+    this.index=bookIndex; //this represents its id value
 }
 
 function addBookToLibrary(name,author,pages,status){
@@ -56,6 +66,9 @@ function displayBooks(){
     <button id='d${myLibrary[bookIndex].index}' class='delButton'>Delete</button>
     </div>`;
     }
+    readButtons= document.querySelectorAll(".readButton"); //updates node list
+    delButtonVal=document.querySelectorAll(`.delButton`);
+    
 }
 //event listener for submit
 submit.addEventListener('click',function(e) {
@@ -66,8 +79,6 @@ submit.addEventListener('click',function(e) {
     }
     displayBooks();
     clearFields();
-    readButtons= document.querySelectorAll(".readButton"); //updates the node list
-    delButtonVal=document.querySelectorAll(`.delButton`);
     eventListenerForButtons(); //add event listeners
     eventListenerForDelete();
 });
@@ -98,11 +109,21 @@ readButtons.forEach(function(elem){
 function eventListenerForDelete(){//!issue here
     delButtonVal.forEach(function(elem){
         elem.addEventListener("click",function(e){
-            const delButtonVal=document.querySelector(`#d${myLibrary[parseId(elem.id)].index}`);
-            console.log(elem.id);
-            myLibrary.splice(parseId(elem.id),1);
-            displayBooks();//update display;
+            delButtonVal=document.querySelector(`#d${myLibrary[parseId(elem.id)].index}`);
+            myLibrary.splice(findIdIndex(elem.id),1);
+            displayBooks();//update display
+            globalBookIndex--;//decrement index
+            delButtonVal=document.querySelectorAll(`.delButton`);
         })
-    })
-    }
+    },
+    delButtonVal.forEach(function(elem){
+        elem.addEventListener("click",function(e){
+            delButtonVal=document.querySelector(`#d${myLibrary[parseId(elem.id)].index}`);
+            myLibrary.splice(findIdIndex(elem.id),1);
+            displayBooks();//update display
+            globalBookIndex--;//decrement index
+            delButtonVal=document.querySelectorAll(`.delButton`);
+        })
+    }))
+}
     
