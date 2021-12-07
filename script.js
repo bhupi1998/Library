@@ -12,6 +12,7 @@ const exit=document.querySelector('#exit');
 let readButtons= document.querySelectorAll(".readButton");
 let delButtonVal=document.querySelectorAll(`.delButton`);
 
+
 //parses the index value of the object from the string. necessary because you cannot start an id with a number
 function parseId(idVal){
     let idIndex= idVal.slice(1);
@@ -68,7 +69,8 @@ function displayBooks(){
     }
     readButtons= document.querySelectorAll(".readButton"); //updates node list
     delButtonVal=document.querySelectorAll(`.delButton`);
-    
+    eventListenerForDelete();
+    eventListenerForButtons();
 }
 //event listener for submit
 submit.addEventListener('click',function(e) {
@@ -79,8 +81,7 @@ submit.addEventListener('click',function(e) {
     }
     displayBooks();
     clearFields();
-    eventListenerForButtons(); //add event listeners
-    eventListenerForDelete();
+
 });
 
 addBook.addEventListener('click',() =>{
@@ -96,34 +97,26 @@ exit.addEventListener('click', function(e){
 function eventListenerForButtons(){
 readButtons.forEach(function(elem){
     elem.addEventListener("click",function(e){
-        if(myLibrary[parseId(elem.id)].read == "Read"){ //toggle button status
-            myLibrary[parseId(elem.id)].read = "Not Read";
+        if(myLibrary[findIdIndex(elem.id)].read == "Read"){ //toggle button status
+            myLibrary[findIdIndex(elem.id)].read = "Not Read";
         }else
-            myLibrary[parseId(elem.id)].read = "Read"; 
-        const readButtonVal=document.querySelector(`#i${myLibrary[parseId(elem.id)].index}`);
-        readButtonVal.innerText=myLibrary[parseId(elem.id)].read;
+            myLibrary[findIdIndex(elem.id)].read = "Read"; 
+        const readButtonVal=document.querySelector(`#i${myLibrary[findIdIndex(elem.id)].index}`);
+        readButtonVal.innerText=myLibrary[findIdIndex(elem.id)].read;
     })
 })
 }
 
-function eventListenerForDelete(){//!issue here
+function eventListenerForDelete(){
     delButtonVal.forEach(function(elem){
         elem.addEventListener("click",function(e){
-            delButtonVal=document.querySelector(`#d${myLibrary[parseId(elem.id)].index}`);
             myLibrary.splice(findIdIndex(elem.id),1);
+            delButtonVal=document.querySelectorAll(`.delButton`);
             displayBooks();//update display
             globalBookIndex--;//decrement index
-            delButtonVal=document.querySelectorAll(`.delButton`);
-        })
-    },
-    delButtonVal.forEach(function(elem){
-        elem.addEventListener("click",function(e){
-            delButtonVal=document.querySelector(`#d${myLibrary[parseId(elem.id)].index}`);
-            myLibrary.splice(findIdIndex(elem.id),1);
-            displayBooks();//update display
-            globalBookIndex--;//decrement index
-            delButtonVal=document.querySelectorAll(`.delButton`);
-        })
-    }))
+                }
+           )
+        }
+    )
 }
     
