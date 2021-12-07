@@ -12,10 +12,21 @@ const exit=document.querySelector('#exit');
 let readButtons= document.querySelectorAll(".readButton");
 let delButtonVal=document.querySelectorAll(`.delButton`);
 
+
 //parses the index value of the object from the string. necessary because you cannot start an id with a number
 function parseId(idVal){
     let idIndex= idVal.slice(1);
     return Number(idIndex);
+}
+
+function findIdIndex(elemId){
+    for(let i=0;i<myLibrary.length;i++){
+        if(myLibrary[i].index==parseId(elemId)){
+            console.log(i);
+            return i;
+        }
+    }
+    return -1;
 }
 function clearFields(){ //clears all values in new book form
     bookTitle.value='';
@@ -29,7 +40,7 @@ function Book(title,author,pages,read,bookIndex){
     this.author=author;
     this.pages=pages;
     this.read=read;
-    this.index=bookIndex;
+    this.index=bookIndex; //this represents its id value
 }
 
 function addBookToLibrary(name,author,pages,status){
@@ -56,6 +67,10 @@ function displayBooks(){
     <button id='d${myLibrary[bookIndex].index}' class='delButton'>Delete</button>
     </div>`;
     }
+    readButtons= document.querySelectorAll(".readButton"); //updates node list
+    delButtonVal=document.querySelectorAll(`.delButton`);
+    eventListenerForDelete();
+    eventListenerForButtons();
 }
 //event listener for submit
 submit.addEventListener('click',function(e) {
@@ -66,10 +81,7 @@ submit.addEventListener('click',function(e) {
     }
     displayBooks();
     clearFields();
-    readButtons= document.querySelectorAll(".readButton"); //updates the node list
-    delButtonVal=document.querySelectorAll(`.delButton`);
-    eventListenerForButtons(); //add event listeners
-    eventListenerForDelete();
+
 });
 
 addBook.addEventListener('click',() =>{
@@ -85,24 +97,26 @@ exit.addEventListener('click', function(e){
 function eventListenerForButtons(){
 readButtons.forEach(function(elem){
     elem.addEventListener("click",function(e){
-        if(myLibrary[parseId(elem.id)].read == "Read"){ //toggle button status
-            myLibrary[parseId(elem.id)].read = "Not Read";
+        if(myLibrary[findIdIndex(elem.id)].read == "Read"){ //toggle button status
+            myLibrary[findIdIndex(elem.id)].read = "Not Read";
         }else
-            myLibrary[parseId(elem.id)].read = "Read"; 
-        const readButtonVal=document.querySelector(`#i${myLibrary[parseId(elem.id)].index}`);
-        readButtonVal.innerText=myLibrary[parseId(elem.id)].read;
+            myLibrary[findIdIndex(elem.id)].read = "Read"; 
+        const readButtonVal=document.querySelector(`#i${myLibrary[findIdIndex(elem.id)].index}`);
+        readButtonVal.innerText=myLibrary[findIdIndex(elem.id)].read;
     })
 })
 }
 
-function eventListenerForDelete(){//!issue here
+function eventListenerForDelete(){
     delButtonVal.forEach(function(elem){
         elem.addEventListener("click",function(e){
-            const delButtonVal=document.querySelector(`#d${myLibrary[parseId(elem.id)].index}`);
-            console.log(elem.id);
-            myLibrary.splice(parseId(elem.id),1);
-            displayBooks();//update display;
-        })
-    })
-    }
+            myLibrary.splice(findIdIndex(elem.id),1);
+            delButtonVal=document.querySelectorAll(`.delButton`);
+            displayBooks();//update display
+            globalBookIndex--;//decrement index
+                }
+           )
+        }
+    )
+}
     
