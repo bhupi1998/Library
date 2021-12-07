@@ -8,13 +8,21 @@ const bookAuthor=document.querySelector('#bookAuthor');
 const bookPages=document.querySelector('#bookPages');
 const readBook=document.querySelector('#readBook');
 const submit=document.querySelector('#submitForm');
+const exit=document.querySelector('#exit');
 
-function Book(title,author,pages,read){
+function clearFields(){ //clears all values in new book form
+    bookTitle.value='';
+    bookAuthor.value='';
+    bookPages.value='';
+    readBook.checked=false;
+}
+function Book(title,author,pages,read,bookIndex){
     //constructor
     this.title=title;
     this.author=author;
     this.pages=pages;
     this.read=read;
+    this.index=bookIndex;
 }
 
 function addBookToLibrary(name,author,pages,status){
@@ -25,7 +33,7 @@ function addBookToLibrary(name,author,pages,status){
         status="Read";
     }else
         status='Not Read';
-    myLibrary[globalBookIndex]= new Book(name,author,pages,status);
+    myLibrary[globalBookIndex]= new Book(name,author,pages,status,globalBookIndex);
     globalBookIndex++;       
     return true;     
 }
@@ -49,10 +57,17 @@ submit.addEventListener('click',function(e) {
         return;
     }
     displayBooks();
-    document.getElementById("newBookForm").style.display = "none";
+    clearFields();
 });
 
 addBook.addEventListener('click',() =>{
-    document.getElementById("newBookForm").style.display = "block";
-    console.log("triggered");
+    document.getElementById("newBookForm").style.display = "inline-flex";
+    
 });
+
+exit.addEventListener('click', function(e){
+    e.preventDefault();
+    document.getElementById("newBookForm").style.display = "none";
+    clearFields();
+})
+

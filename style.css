@@ -17,12 +17,49 @@
     display:inline-flex;
     justify-content: space-between;
     align-items: center;
+    position:sticky;
+    top:0;
+    z-index:1;
     background-color:hsl(284, 17%, 69%);
 }
 .header>button{
     height:50px;
 }
 #newBookForm{
-    display:none;
+    display:inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top:50%;
+    left: 50%;
+    height:500px;
+    width:500px;
+    margin-top: -250px;
+    margin-left: -250px;
+    z-index: 10;
+    background-color: gray;
     border:black solid 2px;
+}
+
+#newBookForm>input{
+    width: 80%;
+}
+
+#newBookForm>#bookPages{ 
+    width: 20%;
+    text-align: center;
+}
+
+#newBookForm>#exit{
+    position: absolute;
+    top:5px;
+    right:5px;
+    height:25px;
+    width:25px;
+}
+#submitForm{
+    margin-top: 20px;
+    width:100px;
+    height: 50px;
 }
