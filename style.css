@@ -23,5 +23,6 @@
     height:50px;
 }
 #newBookForm{
+    display:none;
     border:black solid 2px;
 }
