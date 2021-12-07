@@ -9,6 +9,7 @@ const bookPages=document.querySelector('#bookPages');
 const readBook=document.querySelector('#readBook');
 const submit=document.querySelector('#submitForm');
 const exit=document.querySelector('#exit');
+let readButtons= document.querySelectorAll(".readButton");
 
 function clearFields(){ //clears all values in new book form
     bookTitle.value='';
@@ -45,7 +46,7 @@ function displayBooks(){
     <p>${myLibrary[bookIndex].title}</p>
     <p>${myLibrary[bookIndex].author}</p>
     <p>${myLibrary[bookIndex].pages}</p>
-    <p>${myLibrary[bookIndex].read}</p>
+    <button id='${myLibrary[bookIndex].index}' class='readButton'>${myLibrary[bookIndex].read}</button>
     </div>`;
     }
 }
@@ -58,6 +59,9 @@ submit.addEventListener('click',function(e) {
     }
     displayBooks();
     clearFields();
+    readButtons= document.querySelectorAll(".readButton"); //updates the node list
+    eventListenerForButtons();
+    console.log(readButtons);
 });
 
 addBook.addEventListener('click',() =>{
@@ -70,4 +74,16 @@ exit.addEventListener('click', function(e){
     document.getElementById("newBookForm").style.display = "none";
     clearFields();
 })
-
+function eventListenerForButtons(){
+readButtons.forEach(function(elem){
+    elem.addEventListener("click",function(e){
+        if(myLibrary[elem.id].read == "Read"){ //toggle button status
+            myLibrary[elem.id].read = "Not Read";
+        }else
+            myLibrary[elem.id].read = "Read"; 
+        const readButtonVal=window.querySelector(`#${myLibrary[elem.id].index}`);//!issue here
+        console.log(myLibrary[elem.id].index);
+        readButtonVal.innerText=myLibrary[elem.id].read;
+    })
+})
+}
