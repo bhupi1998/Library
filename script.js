@@ -62,7 +62,7 @@ function displayBooks(){
     container.innerHTML +=  `<div class="bookData">
     <p>${myLibrary[bookIndex].title}</p>
     <p>${myLibrary[bookIndex].author}</p>
-    <p>${myLibrary[bookIndex].pages}</p>
+    <p class="pages">${myLibrary[bookIndex].pages}</p>
     <button id='i${myLibrary[bookIndex].index}' class='readButton'>${myLibrary[bookIndex].read}</button>
     <button id='d${myLibrary[bookIndex].index}' class='delButton'>Delete</button>
     </div>`;

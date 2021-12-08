@@ -63,3 +63,13 @@
     width:100px;
     height: 50px;
 }
+.bookData>p{
+    width:200px;
+    height:20px;
+    border:solid black 1px;
+    background-color: red;
+}
+.bookData>.pages{
+    width:50px;
+    text-align:right;
+}
