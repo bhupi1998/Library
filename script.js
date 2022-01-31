@@ -34,13 +34,15 @@ function clearFields(){ //clears all values in new book form
     bookPages.value='';
     readBook.checked=false;
 }
-function Book(title,author,pages,read,bookIndex){
+class Book{
+    constructor(title,author,pages,read,bookIndex){
     //constructor
     this.title=title;
     this.author=author;
     this.pages=pages;
     this.read=read;
     this.index=bookIndex; //this represents its id value
+    }
 }
 
 function addBookToLibrary(name,author,pages,status){
