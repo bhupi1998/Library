@@ -23,16 +23,18 @@
     <form id="newBookForm">
         <button id="exit">X</button>
         <label for="bookTitle">Book title:</label><br>
-        <input type="text" id="bookTitle" name="bookTitle"><br>
+        <input type="text" id="bookTitle" name="bookTitle" required><br>
         <label for="bookAuthor">Book author:</label><br>
-        <input type="text" id="bookAuthor" name="bookAuthor"><br>
+        <input type="text" id="bookAuthor" name="bookAuthor" required><br>
         <label for="bookPages">Pages:</label><br>
-        <input type="number" id="bookPages" name="bookPages" min="0"><br>
+        <input type="number" id="bookPages" name="bookPages" min="0" value="0" placeholder="0" required><br>
         <div>
             <label for="readBook">Read?</label>
             <input type="checkbox" id="readBook" name="readBook"><br>
         </div>
-        <button id="submitForm">Add</button>
+        <button type="submit" id="submitForm">Add</button>
     </form>
+
+      
 </body>
 </html>

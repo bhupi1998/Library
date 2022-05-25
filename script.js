@@ -34,6 +34,35 @@ function clearFields(){ //clears all values in new book form
     bookPages.value='';
     readBook.checked=false;
 }
+
+bookTitle.addEventListener('input',()=>{
+    bookTitle.setCustomValidity('');
+    bookTitle.checkValidity();
+})
+bookTitle.addEventListener('invalid',()=>{
+    bookTitle.setCustomValidity("Enter a title!");
+})
+
+bookPages.addEventListener('input',()=>{
+    bookPages.setCustomValidity('');
+    bookPages.checkValidity();
+})
+
+bookPages.addEventListener('invalid',()=>{
+    if(bookPages.value<0){
+        bookPages.setCustomValidity('oi, positives only u knob');
+    }else{
+        bookPages.setCustomValidity('that don\'t look right mate');
+    }
+})
+
+form.addEventListener('submit',(e)=>{
+    e.preventDefault();
+    addBookToLibrary(bookTitle.value,bookAuthor.value,bookPages.value,readBook.checked);
+    displayBooks();
+    clearFields();
+})
+
 class Book{
     constructor(title,author,pages,read,bookIndex){
     //constructor
@@ -75,16 +104,16 @@ function displayBooks(){
     eventListenerForButtons();
 }
 //event listener for submit
-submit.addEventListener('click',function(e) {
-    e.preventDefault();
-    if(!addBookToLibrary(bookTitle.value,bookAuthor.value,bookPages.value,readBook.checked)){ //if false is returned exit the function
-        alert("all fields required");
-        return;
-    }
-    displayBooks();
-    clearFields();
+// submit.addEventListener('click',function(e) {
+    // e.preventDefault();
+    // if(!addBookToLibrary(bookTitle.value,bookAuthor.value,bookPages.value,readBook.checked)){ //if false is returned exit the function
+    //     alert("all fields required");
+    //     return;
+    // }
+    // displayBooks();
+    // clearFields();
 
-});
+// });
 
 addBook.addEventListener('click',() =>{
     document.getElementById("newBookForm").style.display = "inline-flex";
